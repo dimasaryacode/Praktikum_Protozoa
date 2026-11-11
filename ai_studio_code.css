@@ -1,0 +1,162 @@
+/**
+ * LABORATORIUM VIRTUAL PROTOZOA (PROTISTA MIRIP HEWAN) - SISWA SMA
+ * File: laboratorium_protozoa.css
+ */
+
+:root {
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Tema Laboratorium Gelap */
+  --bg-lab-deep: #020617;       /* slate-950 */
+  --bg-lab-surface: #0f172a;    /* slate-900 */
+  --bg-lab-card: #1e293b;       /* slate-800 */
+  --border-lab: #334155;        /* slate-700 */
+
+  /* Aksen Optik & Biologi */
+  --cyan-bright: #22d3ee;
+  --cyan-glow: rgba(34, 211, 238, 0.25);
+  --emerald-bio: #34d399;
+  --amber-stain: #fbbf24;      /* Lugol Iodin */
+  --blue-stain: #38bdf8;       /* Metilen Biru */
+
+  /* Indikator Zona Saprobitas Ekologis */
+  --saprobic-poly: #f43f5e;     /* Polisaprobik (Sangat Tercemar) */
+  --saprobic-alpha: #f97316;    /* Alpha-Mesosaprobik (Tercemar Sedang-Berat) */
+  --saprobic-beta: #eab308;     /* Beta-Mesosaprobik (Tercemar Ringan) */
+  --saprobic-oligo: #10b981;    /* Oligosaprobik (Bersih/Murni) */
+
+  /* Transform Optik */
+  --obj-scale: 1;
+  --st-x: 0px;
+  --st-y: 0px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-main);
+  background-color: var(--bg-lab-deep);
+  color: #f8fafc;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+code, pre, .font-mono, .tabular-nums {
+  font-family: var(--font-mono);
+}
+
+/* Kaca Preparat Basah (Glass Slide) */
+.glass-slide {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 180px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-droplet {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.droplet-unstained {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(56, 189, 248, 0.1) 70%);
+  border: 2px solid rgba(56, 189, 248, 0.6);
+}
+
+.droplet-iodine {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(180, 83, 9, 0.2) 70%);
+  border: 2px solid rgba(251, 191, 36, 0.8);
+}
+
+.droplet-methylene {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(29, 78, 216, 0.2) 70%);
+  border: 2px solid rgba(96, 165, 250, 0.85);
+}
+
+/* Lensa Barrel & Lingkar Pandang Okuler */
+.microscope-barrel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 520px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #000000;
+  border: 8px solid #1e293b;
+  box-shadow: 0 0 0 2px #334155, 0 20px 40px -10px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+.microscope-vignette {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: inset 0 0 50px 20px rgba(0, 0, 0, 0.95);
+}
+
+/* Animasi Motilitas Hidup Bergerak Bebas */
+@keyframes swimWobble {
+  0% { transform: scale(var(--obj-scale, 1)) translate(var(--st-x, 0), var(--st-y, 0)) rotate(0deg); }
+  25% { transform: scale(var(--obj-scale, 1)) translate(calc(var(--st-x, 0) + 2.5px), calc(var(--st-y, 0) - 2px)) rotate(1deg); }
+  50% { transform: scale(var(--obj-scale, 1)) translate(calc(var(--st-x, 0) - 1px), calc(var(--st-y, 0) + 2.5px)) rotate(-0.5deg); }
+  75% { transform: scale(var(--obj-scale, 1)) translate(calc(var(--st-x, 0) - 2.5px), calc(var(--st-y, 0) - 1px)) rotate(-1deg); }
+  100% { transform: scale(var(--obj-scale, 1)) translate(var(--st-x, 0), var(--st-y, 0)) rotate(0deg); }
+}
+
+.live-motility {
+  animation: swimWobble 4.5s ease-in-out infinite;
+}
+
+/* Kisi Retikel Mikrometer (µm) */
+.reticle-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  background-image: 
+    linear-gradient(to right, rgba(34, 211, 238, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+}
+
+/* Format Cetak Laporan Resmi (@media print) */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+  header, nav, button, .range-slider {
+    display: none !important;
+  }
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  th, td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 6px 10px !important;
+  }
+}
